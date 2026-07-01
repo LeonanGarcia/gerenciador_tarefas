@@ -1,0 +1,13 @@
+{
+  "expo": {
+    "name": "task-manager-app",
+    "slug": "task-manager-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "assetBundlePatterns": ["**/*"],
+    "ios": { "supportsTablet": true },
+    "android": {},
+    "web": { "bundler": "metro" }
+  }
+}
