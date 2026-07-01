@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import type { Task } from '../types/task';
+import { colors, radii } from '../theme/tokens';
+import TrashIcon from './TrashIcon';
 
 interface TaskItemProps {
   task: Task;
@@ -11,10 +13,18 @@ interface TaskItemProps {
 
 export default function TaskItem({ task, onPress, onToggle, onDelete }: TaskItemProps) {
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress} activeOpacity={0.7}>
-      <TouchableOpacity style={styles.checkbox} onPress={onToggle}>
-        <View style={[styles.checkboxInner, task.completed && styles.checkboxChecked]} />
-      </TouchableOpacity>
+    <TouchableOpacity
+      style={[styles.container, { borderLeftColor: task.completed ? colors.border : colors.red }]}
+      onPress={onPress}
+      activeOpacity={0.7}
+    >
+      <TouchableOpacity
+        style={[
+          styles.checkbox,
+          { borderColor: task.completed ? colors.red : colors.border, backgroundColor: task.completed ? colors.red : 'transparent' },
+        ]}
+        onPress={onToggle}
+      />
       <View style={styles.textContainer}>
         <Text style={[styles.title, task.completed && styles.titleDone]}>{task.title}</Text>
         {task.description ? (
@@ -23,8 +33,12 @@ export default function TaskItem({ task, onPress, onToggle, onDelete }: TaskItem
           </Text>
         ) : null}
       </View>
-      <TouchableOpacity onPress={onDelete} style={styles.deleteButton}>
-        <Text style={styles.deleteLabel}>Excluir</Text>
+      <TouchableOpacity
+        onPress={onDelete}
+        style={styles.deleteButton}
+        hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+      >
+        <TrashIcon size={18} color={colors.red} />
       </TouchableOpacity>
     </TouchableOpacity>
   );
@@ -34,33 +48,25 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 12,
+    paddingVertical: 14,
     paddingHorizontal: 14,
-    backgroundColor: '#ffffff',
-    borderRadius: 10,
-    marginBottom: 10,
+    backgroundColor: colors.surface,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderLeftWidth: 3,
+    borderRadius: radii.md,
+    marginBottom: 12,
   },
   checkbox: {
-    width: 24,
-    height: 24,
-    borderRadius: 12,
-    borderWidth: 2,
-    borderColor: '#2563eb',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: 12,
+    width: 22,
+    height: 22,
+    borderRadius: 11,
+    borderWidth: 1.5,
+    marginRight: 14,
   },
-  checkboxInner: {
-    width: 12,
-    height: 12,
-    borderRadius: 6,
-    backgroundColor: 'transparent',
-  },
-  checkboxChecked: { backgroundColor: '#2563eb' },
   textContainer: { flex: 1 },
-  title: { fontSize: 16, fontWeight: '600', color: '#111827' },
-  titleDone: { textDecorationLine: 'line-through', color: '#9ca3af' },
-  description: { fontSize: 13, color: '#6b7280', marginTop: 2 },
+  title: { fontSize: 16, fontWeight: '600', color: colors.ink },
+  titleDone: { textDecorationLine: 'line-through', color: colors.inkMuted },
+  description: { fontSize: 13, color: colors.inkMuted, marginTop: 2 },
   deleteButton: { paddingHorizontal: 8, paddingVertical: 4 },
-  deleteLabel: { color: '#dc2626', fontSize: 13, fontWeight: '600' },
 });

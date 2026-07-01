@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, TextInput, TextInputProps, View } from 'react-native';
+import { colors } from '../theme/tokens';
 
 interface AppTextInputOwnProps {
   label: string;
@@ -14,7 +15,7 @@ export default function AppTextInput({ label, error, style, ...rest }: AppTextIn
       <Text style={styles.label}>{label}</Text>
       <TextInput
         style={[styles.input, error ? styles.inputError : null, style]}
-        placeholderTextColor="#9ca3af"
+        placeholderTextColor={colors.inkMuted}
         {...rest}
       />
       {error ? <Text style={styles.error}>{error}</Text> : null}
@@ -23,17 +24,22 @@ export default function AppTextInput({ label, error, style, ...rest }: AppTextIn
 }
 
 const styles = StyleSheet.create({
-  container: { marginBottom: 16 },
-  label: { fontSize: 14, fontWeight: '600', color: '#374151', marginBottom: 6 },
-  input: {
-    borderWidth: 1,
-    borderColor: '#d1d5db',
-    borderRadius: 8,
-    paddingHorizontal: 12,
-    paddingVertical: 10,
-    fontSize: 15,
-    color: '#111827',
+  container: { marginBottom: 22 },
+  label: {
+    fontSize: 11,
+    fontWeight: '700',
+    letterSpacing: 1,
+    textTransform: 'uppercase',
+    color: colors.inkMuted,
+    marginBottom: 8,
   },
-  inputError: { borderColor: '#dc2626' },
-  error: { color: '#dc2626', fontSize: 12, marginTop: 4 },
+  input: {
+    borderBottomWidth: 1,
+    borderBottomColor: colors.border,
+    paddingVertical: 8,
+    fontSize: 16,
+    color: colors.ink,
+  },
+  inputError: { borderBottomColor: colors.red },
+  error: { color: colors.red, fontSize: 12, marginTop: 6, letterSpacing: 0.2 },
 });

@@ -1,3 +1,4 @@
+import { colors } from '../theme/tokens';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import type { TaskFormScreenProps } from '../types/navigation';
@@ -67,6 +68,6 @@ export default function TaskFormScreen({ route, navigation }: TaskFormScreenProp
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#f3f4f6', padding: 16 },
+  container: { flex: 1, backgroundColor: colors.background, padding: 16 },
   textArea: { height: 100, textAlignVertical: 'top' },
 });

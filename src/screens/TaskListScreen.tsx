@@ -6,6 +6,7 @@ import type { Task } from '../types/task';
 import { deleteTask, getTasks, toggleTaskStatus } from '../storage/taskStorage';
 import AppButton from '../components/AppButton';
 import TaskItem from '../components/TaskItem';
+import { colors } from '../theme/tokens';
 
 export default function TaskListScreen({ navigation }: TaskListScreenProps) {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -62,8 +63,8 @@ export default function TaskListScreen({ navigation }: TaskListScreenProps) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#f3f4f6', paddingHorizontal: 16, paddingTop: 16 },
-  addButton: { marginBottom: 16 },
+  container: { flex: 1, backgroundColor: colors.background, paddingHorizontal: 16, paddingTop: 16 },
+  addButton: { marginBottom: 20 },
   list: { paddingBottom: 24 },
-  empty: { textAlign: 'center', color: '#6b7280', marginTop: 40, fontSize: 15 },
+  empty: { textAlign: 'center', color: colors.inkMuted, marginTop: 40, fontSize: 15 },
 });
